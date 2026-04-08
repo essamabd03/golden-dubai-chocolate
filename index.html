@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Dubai Chocolate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #D4AF6A;
+      --gold2: #F0D090;
+      --gold3: #A07840;
+      --bg: #080C10;
+      --surface: rgba(255,255,255,0.035);
+      --surface2: rgba(255,255,255,0.06);
+      --border: rgba(212,175,106,0.2);
+      --border2: rgba(212,175,106,0.45);
+      --text: #C8BAA2;
+      --muted: #6a7a8a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      overflow: hidden;
+    }
+
+    /* animated orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 600px; height: 600px; background: radial-gradient(circle, #c9a84c, transparent 70%); top: -200px; left: -150px; animation-delay: 0s; }
+    .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, #8b4513, transparent 70%); bottom: -100px; right: -100px; animation-delay: -4s; }
+    .orb3 { width: 300px; height: 300px; background: radial-gradient(circle, #c9a84c55, transparent 70%); top: 50%; left: 60%; animation-delay: -8s; }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, -40px) scale(1.08); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(212,175,106,0.06);
+      backdrop-filter: blur(8px);
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-badge::before, .hero-badge::after {
+      content: '✦';
+      font-size: 8px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      font-weight: 300;
+      line-height: 0.95;
+      color: #fff;
+      margin-bottom: 8px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold2) 0%, var(--gold) 50%, var(--gold3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: 1px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-desc {
+      max-width: 420px;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 48px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .btn-primary {
+      padding: 15px 38px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold3) 100%);
+      color: #080C10;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 0 30px rgba(212,175,106,0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(212,175,106,0.4); }
+
+    .btn-ghost {
+      padding: 14px 38px;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .btn-ghost:hover { background: rgba(212,175,106,0.08); border-color: var(--gold); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ── STRIP ── */
+    .marquee-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .marquee-inner span { margin: 0 32px; }
+    .marquee-inner .dot { color: var(--gold3); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── MENU SECTION ── */
+    .menu-section {
+      position: relative;
+      padding: 120px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 60px;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ── MENU GRID ── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+
+    .menu-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      cursor: default;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+      overflow: hidden;
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,175,106,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .menu-card:hover {
+      background: var(--surface2);
+      border-color: var(--border2);
+      transform: translateY(-3px);
+    }
+    .menu-card:hover::before { opacity: 1; }
+
+    .card-number {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .card-price {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .qty-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qty-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .q-btn {
+      background: none;
+      border: none;
+      color: var(--gold);
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .q-btn:hover { background: rgba(212,175,106,0.12); }
+
+    .q-val {
+      width: 36px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    /* ── TOTAL ── */
+    .total-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      padding-top: 32px;
+    }
+
+    .total-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .total-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold2);
+      line-height: 1;
+    }
+
+    /* ── DIVIDER ── */
+    .divider-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border2), transparent);
+    }
+
+    /* ── ORDER FORM ── */
+    .order-section {
+      padding: 120px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-full { grid-column: 1 / -1; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      width: 100%;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--muted); }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--gold);
+      background: var(--surface2);
+    }
+
+    .field select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4AF6A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+    .field select option { background: #111820; }
+
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    #delivery-group { display: none; }
+
+    .submit-wrap { margin-top: 8px; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--gold2) 0%, var(--gold) 50%, var(--gold3) 100%);
+      color: #080C10;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+      box-shadow: 0 4px 30px rgba(212,175,106,0.3);
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 50px rgba(212,175,106,0.45); }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* ── SUCCESS ── */
+    .success-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(212,175,106,0.06), rgba(212,175,106,0.02));
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.6rem;
+    }
+    .success-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .success-card p { color: var(--muted); line-height: 1.8; font-size: 0.9rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 3px;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; gap: 2px; }
+      .total-section { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-badge">Handcrafted in Small Batches</div>
+
+  <h1>Golden<br><em>Dubai</em><br>Chocolate</h1>
+  <p class="hero-sub">Artisan chocolate, crafted with love</p>
+  <p class="hero-desc">Indulge in our signature collection of handmade Dubai-style chocolates — available fresh for pickup or local delivery.</p>
+
+  <div class="hero-ctas">
+    <a href="#menu" class="btn-primary">Explore Menu</a>
+    <a href="#order" class="btn-ghost">Order Now</a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Small Roses</span><span class="dot">✦</span>
+    <span>Large Roses</span><span class="dot">✦</span>
+    <span>Square</span><span class="dot">✦</span>
+    <span>Medium Bar</span><span class="dot">✦</span>
+    <span>Large Bar</span><span class="dot">✦</span>
+    <span>Small Sphere</span><span class="dot">✦</span>
+    <span>Small Hearts</span><span class="dot">✦</span>
+    <span>Small Roses</span><span class="dot">✦</span>
+    <span>Large Roses</span><span class="dot">✦</span>
+    <span>Square</span><span class="dot">✦</span>
+    <span>Medium Bar</span><span class="dot">✦</span>
+    <span>Large Bar</span><span class="dot">✦</span>
+    <span>Small Sphere</span><span class="dot">✦</span>
+    <span>Small Hearts</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <p class="section-eyebrow reveal">Our Collection</p>
+  <h2 class="section-title reveal">Every piece,<br><em>handcrafted.</em></h2>
+
+  <div class="menu-grid" id="menu-grid">
+    <div class="menu-card reveal" data-name="Small Roses" data-price="5">
+      <div class="card-number">01</div>
+      <div class="card-name">Small Roses</div>
+      <div class="card-price">$5 each</div>
+      <div class="card-desc">Beautiful small rose chocolate pieces, delicately shaped.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Large Roses" data-price="6">
+      <div class="card-number">02</div>
+      <div class="card-name">Large Roses</div>
+      <div class="card-price">$6 each</div>
+      <div class="card-desc">Large rose chocolates with an elegant, luxurious finish.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Square" data-price="5">
+      <div class="card-number">03</div>
+      <div class="card-name">Square</div>
+      <div class="card-price">$5 each</div>
+      <div class="card-desc">Classic square chocolate pieces — timeless and satisfying.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Medium Bar" data-price="10">
+      <div class="card-number">04</div>
+      <div class="card-name">Medium Bar</div>
+      <div class="card-price">$10 each</div>
+      <div class="card-desc">A rich, medium-size Dubai chocolate bar bursting with flavor.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Large Bar" data-price="20">
+      <div class="card-number">05</div>
+      <div class="card-name">Large Bar</div>
+      <div class="card-price">$20 each</div>
+      <div class="card-desc">Premium large bar — the perfect gift or indulgent treat for sharing.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Small Sphere" data-price="3">
+      <div class="card-number">06</div>
+      <div class="card-name">Small Sphere</div>
+      <div class="card-price">$3 each</div>
+      <div class="card-desc">Smooth, round sphere chocolates with a silky melt-in-your-mouth center.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card reveal" data-name="Small Hearts" data-price="3">
+      <div class="card-number">07</div>
+      <div class="card-name">Small Hearts</div>
+      <div class="card-price">$3 each</div>
+      <div class="card-desc">Sweet, heart-shaped chocolate pieces — perfect for gifting with love.</div>
+      <div class="qty-wrapper">
+        <span class="qty-label">Qty</span>
+        <div class="qty-control">
+          <button class="q-btn" onclick="changeQty(this,-1)">−</button>
+          <div class="q-val">0</div>
+          <button class="q-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="total-section reveal">
+    <div>
+      <div class="total-label">Order Total</div>
+    </div>
+    <div class="total-amount" id="total-display">$0.00</div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ORDER FORM -->
+<section class="order-section" id="order">
+  <p class="section-eyebrow reveal">Ready?</p>
+  <h2 class="section-title reveal">Place your<br><em>order.</em></h2>
+
+  <form id="order-form" onsubmit="submitOrder(event)">
+    <div class="form-grid">
+
+      <div class="field reveal">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your name" required />
+      </div>
+
+      <div class="field reveal">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Your number" required />
+      </div>
+
+      <div class="field reveal">
+        <label for="date">Date</label>
+        <input type="date" id="date" required />
+      </div>
+
+      <div class="field reveal">
+        <label for="order-type">Order Type</label>
+        <select id="order-type" onchange="toggleDelivery()">
+          <option value="pickup">Pickup</option>
+          <option value="delivery">Delivery</option>
+        </select>
+      </div>
+
+      <div class="field form-full reveal" id="delivery-group">
+        <label for="address">Delivery Address</label>
+        <input type="text" id="address" placeholder="Full delivery address" />
+      </div>
+
+      <div class="field form-full reveal">
+        <label for="notes">Special Requests</label>
+        <textarea id="notes" placeholder="Allergies, special packaging, pickup instructions..."></textarea>
+      </div>
+
+      <div class="submit-wrap form-full reveal">
+        <button type="submit" class="submit-btn">Place Order via WhatsApp</button>
+      </div>
+
+    </div>
+  </form>
+
+  <div class="success-card" id="success-card">
+    <div class="success-icon">✦</div>
+    <h3>Order Received</h3>
+    <p>Your WhatsApp is opening with your order details.<br>We'll confirm with you shortly — thank you for choosing Golden Dubai Chocolate.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Golden Dubai Chocolate</div>
+  <p class="footer-copy">© 2026 · Handmade with love · All rights reserved</p>
+</footer>
+
+<script>
+  // ── QUANTITY ──
+  function changeQty(btn, delta) {
+    const v = btn.parentElement.querySelector('.q-val');
+    let n = parseInt(v.textContent) + delta;
+    if (n < 0) n = 0;
+    v.textContent = n;
+    updateTotal();
+  }
+
+  function updateTotal() {
+    let total = 0;
+    document.querySelectorAll('.menu-card').forEach(c => {
+      total += parseFloat(c.dataset.price) * parseInt(c.querySelector('.q-val').textContent);
+    });
+    document.getElementById('total-display').textContent = '$' + total.toFixed(2);
+  }
+
+  // ── DELIVERY TOGGLE ──
+  function toggleDelivery() {
+    const dg = document.getElementById('delivery-group');
+    const addr = document.getElementById('address');
+    const isDelivery = document.getElementById('order-type').value === 'delivery';
+    dg.style.display = isDelivery ? 'flex' : 'none';
+    addr.required = isDelivery;
+  }
+
+  // ── SUBMIT ──
+  function submitOrder(e) {
+    e.preventDefault();
+    const items = [];
+    document.querySelectorAll('.menu-card').forEach(c => {
+      const qty = parseInt(c.querySelector('.q-val').textContent);
+      if (qty > 0) items.push(`${qty}× ${c.dataset.name} @ $${c.dataset.price}`);
+    });
+
+    if (!items.length) {
+      alert('Please select at least one item.');
+      return;
+    }
+
+    const name  = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const date  = document.getElementById('date').value;
+    const type  = document.getElementById('order-type').value;
+    const addr  = document.getElementById('address').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+    const total = document.getElementById('total-display').textContent;
+
+    let msg = `*✦ Golden Dubai Chocolate — New Order ✦*\n\n`;
+    msg += `👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n📅 *Date:* ${date}\n`;
+    msg += `📦 *Type:* ${type === 'delivery' ? 'Delivery' : 'Pickup'}\n`;
+    if (addr) msg += `📍 *Address:* ${addr}\n`;
+    msg += `\n*Order:*\n${items.join('\n')}\n\n💰 *Total: ${total}*`;
+    if (notes) msg += `\n\n📝 *Notes:* ${notes}`;
+
+    document.getElementById('order-form').style.display = 'none';
+    document.getElementById('success-card').style.display = 'block';
+
+    const waNumber = '1234567890'; // ← Replace with your WhatsApp number (digits only)
+    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // ── SET MIN DATE ──
+  document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.06) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
